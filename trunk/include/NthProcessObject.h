@@ -8,7 +8,7 @@
 #ifndef NTHPROCESSOBJECT_H
 #define NTHPROCESSOBJECT_H
 
-#include <highgui.h>
+#include "NthTypes.h"
 
 #ifdef DLL_FILE
 class _declspec(dllexport) NthProcessObject
@@ -16,16 +16,20 @@ class _declspec(dllexport) NthProcessObject
 class _declspec(dllimport) NthProcessObject
 #endif
 {
-	private:
+protected :
+	IplImage * _srcImage;
+//	char*     _imageData;
+	int       _width;
+	int       _height;
 
-	public:
+public :
 
-		IplImage* _srcImage;
-		char*     _imageData;
-		int       _width;
-		int       _height;
+	NthProcessObject() ;
+	~NthProcessObject() ;
 
-		NthProcessObject(void);
-		~NthProcessObject(void);
-};
+	IplImage * image () ;
+	int width () ; 
+	int height () ; 
+} ;
+
 #endif
