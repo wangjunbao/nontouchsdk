@@ -1,5 +1,5 @@
 /*
- * NthImage.h
+ * NthImageIO.h
  * CopyRight @South China Institute of Software Engineering,.GZU
  * Author: 
  * 2010/10/20
@@ -8,32 +8,31 @@
 #ifndef NTHIMAGE_H
 #define NTHIMAGE_H
 
-#include <iostream>
-#include <highgui.h>
+#include "NthTypes.h"
 #include "NthProcessObject.h"
-#include "NthStructure.h"
-
-using namespace std;
 
 #ifdef DLL_FILE
-class _declspec(dllexport) NthImage : private NthProcessObject
+class _declspec(dllexport) NthImage : public NthProcessObject
 #else
-class _declspec(dllimport) NthImage : private NthProcessObject
+class _declspec(dllimport) NthImage : public NthProcessObject
 #endif
 {
-	private:
+private : 
+	char _strPath [_MAX_PATH] ; 
 
-	public:
+public:
+	NthImage ();
+	NthImage (char * strPath) ; 
+	NthImage (IplImage * image) ; 
+	~NthImage ();
 
-		NthImage(void);
-		~NthImage(void);
+	int Create (int height, int width) ; 
 
-		NthColor getPix( int x, int y );
-		void     setPix( int x, int y, NthColor color );
-		void     createImage( int width, int height );
-		void     loadImage( char *path );
-		void     saveImage( char *path );
-		IplImage *image();
-
+	int Load (char * strPath) ; 
+	int Load() ; 
+	int Save () ;
+	int SaveAs (char * strPath) ;
+	int SavaAs (void * pImage, char * strPath) ; 
 };
-#endif 
+
+#endif

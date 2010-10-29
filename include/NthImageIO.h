@@ -8,19 +8,28 @@
 #ifndef NTHIMAGEIO_H
 #define NTHIMAGEIO_H
 
-#include "NthImage.h"
+#include "cxtypes.h"
 
 #ifdef DLL_FILE
 class _declspec(dllexport) NthImageIO
 #else
+
 class _declspec(dllimport) NthImageIO
 #endif
 {
-	public:
+private : 
+	IplImage * m_scrImage ; 
+	char m_strPath [MAX_PATH] ; 
 
-		NthImageIO(void);
-		~NthImageIO(void);
+public:
+	NthImageIO ();
+	NthImageIO (char * strPath) ; 
+	~NthImageIO ();
 
-
+	int LoadImage (char * strPath) ; 
+	int LoadImage () ; 
+	int SaveImage () ;
+	int SaveImageAs (char * strPath) ;
 };
+
 #endif
